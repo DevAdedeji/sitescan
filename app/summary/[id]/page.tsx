@@ -8,16 +8,20 @@ interface PageProps {
     };
 }
 
-export default async function SummaryPage(props: PageProps) {
-    const params = await props.params;
-    const { id } = params;
-    // Fetch summary from MongoDB via Prisma (server-side)
+export default async function SummaryPage({ params }: PageProps) {
+    const { id } = await params;
+
     const summary = await prisma.websiteSummary.findUnique({
         where: { id },
     });
 
-
-    if (!summary) return <p>Summary not found</p>;
+    if (!summary) return (
+        <main className="flex items-center justify-center py-8">
+            <div className="min-h-[80vh] w-[90%] md:w-[70%] mx-auto flex flex-col gap-4 items-center justify-center">
+                <p className="text-2xl font-bold text-center">Summary not found</p>
+            </div>
+        </main>
+    );
     return (
         <main className="flex items-center justify-center py-8">
             <div className="min-h-[80vh] w-[90%] md:w-[70%] mx-auto flex flex-col gap-4 items-center justify-center">
