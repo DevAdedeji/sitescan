@@ -2,16 +2,20 @@ import { Card, CardHeader } from "@/components/ui/card";
 import { Info, Gavel, BrushCleaning, Database, } from "lucide-react";
 import { prisma } from "@/lib/prisma";
 
+interface PageProps {
+    params: {
+        id: string;
+    };
+}
 
-export default async function SummaryPage({ params }: { params: { id: string } }) {
+export default async function SummaryPage(props: PageProps) {
+    const params = await props.params;
     const { id } = params;
-
     // Fetch summary from MongoDB via Prisma (server-side)
     const summary = await prisma.websiteSummary.findUnique({
         where: { id },
     });
 
-    console.log(summary)
 
     if (!summary) return <p>Summary not found</p>;
     return (
