@@ -1,6 +1,31 @@
 import { Card, CardHeader } from "@/components/ui/card";
 import { Info, Gavel, BrushCleaning, Database, } from "lucide-react";
 import { prisma } from "@/lib/prisma";
+import { Metadata } from "next";
+
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+    const { id } = await params;
+
+    const summary = await prisma.websiteSummary.findUnique({
+        where: { id },
+    });
+
+    if (!summary) {
+        return {
+            title: "Summary Not Found",
+            description: "No summary found for this website.",
+        };
+    }
+
+    return {
+        title: summary.url,
+        description: summary.about,
+        openGraph: {
+            title: summary.url,
+            description: summary.about,
+        },
+    };
+}
 
 
 export default async function SummaryPage({ params }: { params: Promise<{ id: string }> }) {
