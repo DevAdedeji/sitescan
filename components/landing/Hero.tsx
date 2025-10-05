@@ -21,7 +21,6 @@ export default function Hero() {
                 body: JSON.stringify({ url })
             })
             const summary = await response.json();
-            console.log(summary)
             if (summary.id) {
                 router.push(`/summary/${summary.id}`);
             } else {

@@ -14,5 +14,10 @@ model WebsiteSummary {
     terms          String
     policies       String
     data_collected String
+    performance    Int?
+    accessibility  Int?
+    bestPractices  Int?
+    seo            Int?
+    userId         String?
     createdAt      DateTime @default(now())
 }
