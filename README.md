@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SiteScan
+
+SiteScan is a web app that lets you quickly analyze and summarize any website. It fetches key details like **About**, **Terms of Service**, **Privacy Policy**, **Data Collected**, and **Lighthouse scores** (Performance, Accessibility, SEO, Best Practices) into an easy-to-read overview.
+
+**Live Demo:** [https://sitescan-rho.vercel.app]
+
+## Features
+
+* 🌐 Summarize websites with a clean UI
+* 📊 Visualize Lighthouse scores with progress charts
+* 📑 Display important sections: About, Terms, Policies, and Data collected
+* 🛡️ Simple rate limiting to prevent abuse (max 3 scans per user/day)
+* 🎨 Built with modern UI components (Next.js, TailwindCSS, Shadcn)
+* 💾 MongoDB + Prisma for data storage
+
+## Tech Stack
+
+* [Next.js 1r (App Router)](https://nextjs.org/)
+* [Tailwind CSS](https://tailwindcss.com/)
+* [Prisma](https://www.prisma.io/) + [MongoDB](https://www.mongodb.com/)
+* [react-circular-progressbar](https://www.npmjs.com/package/react-circular-progressbar) for score visuals
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/your-username/sitescan.git
+cd sitescan
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up environment variables
+
+Create a `.env` file in the root directory and add:
+
+```env
+DATABASE_URL="your-mongodb-connection-string"
+```
+
+### 4. Run database migrations
+
+```bash
+npx prisma generate
+```
+
+### 5. Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to use the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Folder Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+components/         # UI components (SummaryCard, LighthouseOverview, etc.)
+app/                # Next.js App Router pages and routes
+lib/                # Prisma client and utilities
+prisma/             # Prisma schema
+```
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
