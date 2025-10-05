@@ -96,6 +96,14 @@ export async function POST(req: Request) {
             userId = crypto.randomUUID();
         }
 
+        const existing = await prisma.websiteSummary.findFirst({
+            where: { url }
+        })
+
+        if (existing) {
+            return NextResponse.json(existing)
+        }
+
         const todayStart = startOfToday();
         const scanCount = await prisma.websiteSummary.count({
             where: {
